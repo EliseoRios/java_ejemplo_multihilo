@@ -28,6 +28,7 @@ public class dbHelper extends SQLiteOpenHelper
 		db.execSQL(administracionDb.tablaExamenes);
 		db.execSQL(administracionDb.tablaPracticas);
 		db.execSQL(administracionDb.tablaAsistencias);
+		db.execSQL(administracionDb.tablaDias);
 		
 		db.execSQL(administracionDb.tablaRegistrarActividades);
 		db.execSQL(administracionDb.tablaPosicion);

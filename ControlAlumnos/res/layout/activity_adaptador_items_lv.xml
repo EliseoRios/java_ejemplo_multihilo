@@ -18,6 +18,16 @@
         android:textColor="@color/nombreLv"
         android:textSize="15sp"
         android:textStyle="bold" />
+    
+    <TextView 
+        android:id="@+id/txtExtras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNombre"
+        android:layout_toRightOf="@+id/imgFoto"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="@string/txtWhite"/>
 
     <ImageView
         android:id="@+id/imgFoto"

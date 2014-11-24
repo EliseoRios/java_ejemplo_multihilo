@@ -5,8 +5,9 @@ public class Items
 	private String nombre;
 	private String numeroExtra;
 	private int imagen;
+	private String extra;
 	
-	public Items(String nombre, String numero, int imagen)
+	public Items(String nombre, String numero, int imagen, String extra)
 	{
 		this.nombre = nombre;
 		this.numeroExtra = numero;
@@ -28,6 +29,11 @@ public class Items
 		this.imagen = imagen;
 	}
 	
+	public void setExtra(String extra)
+	{
+		this.extra = extra;
+	}
+	
 	public String getNombre()
 	{
 		return this.nombre;
@@ -41,5 +47,10 @@ public class Items
 	public int getImagen()
 	{
 		return this.imagen;
+	}
+	
+	public String getExtra()
+	{
+		return this.extra;
 	}
 }

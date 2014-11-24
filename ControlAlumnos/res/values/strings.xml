@@ -8,7 +8,18 @@
     <string name="title_activity_dias">Días</string>
     <string name="title_activity_adaptador_datos">Adaptador datos</string>
     <string name="txtWhite"></string>
+
     <color name="backgroudLv">#191915</color>
     <color name="nombreLv">#FFFFFF</color>
+    <color name="colorNaranja">#FFBF00</color>
+
+    <string name="title_activity_eliminar_curso">Eliminar curso</string>
+    <string name="title_activity_asistecia">Asistecia</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
 
 </resources>

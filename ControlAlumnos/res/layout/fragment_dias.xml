@@ -3,13 +3,16 @@
     android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorNaranja"
     tools:context="com.example.controlalumnos.Dias$PlaceholderFragment" >
 
     <ListView
         android:id="@+id/lvDias"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" 
-        android:background="@color/backgroudLv">
+        android:layout_width="292dp"
+        android:layout_height="438dp"
+        android:background="@color/backgroudLv" 
+        android:layout_gravity="center">
+
     </ListView>
 
 </FrameLayout>

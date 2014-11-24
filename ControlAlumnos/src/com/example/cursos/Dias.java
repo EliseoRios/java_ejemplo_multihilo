@@ -1,17 +1,21 @@
 package com.example.cursos;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.adaptadoresListView.AdaptadorDatos;
 import com.example.adaptadoresListView.Items;
 import com.example.controlalumnos.R;
+import com.example.sqlite.administracionDb;
 
 public class Dias extends ActionBarActivity 
 {
@@ -44,24 +48,43 @@ public class Dias extends ActionBarActivity
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 		{
+			administracionDb administracion = new administracionDb(this.getActivity());
 			View rootView = inflater.inflate(R.layout.fragment_dias, container,false);
-			
+		
+			String miDia[] = {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
+
 			lvDias = (ListView) rootView.findViewById(R.id.lvDias);
-			int cantidadCursos[]={2,4,1,0,5,7,0};
 			
-			Items[] misItems = {
+			final Items[] misItems = {
 					
-					new Items("Lunes",cantidadCursos[0]+" cursos",R.drawable.ic_launcher),
-					new Items("Martes",cantidadCursos[1]+" cursos",R.drawable.ic_launcher),
-					new Items("Miércoles",cantidadCursos[2]+" cursos",R.drawable.ic_launcher),
-					new Items("Jueves",cantidadCursos[3]+" cursos",R.drawable.ic_launcher),
-					new Items("Viernes",cantidadCursos[4]+" cursos",R.drawable.ic_launcher),
-					new Items("Sábado",cantidadCursos[5]+" cursos",R.drawable.ic_launcher),
-					new Items("Domingo",cantidadCursos[6]+" cursos",R.drawable.ic_launcher)
+					new Items(miDia[0],"",R.drawable.lunes,""),
+					new Items(miDia[1],"",R.drawable.martes,""),
+					new Items(miDia[2],"",R.drawable.miercoles,""),
+					new Items(miDia[3],"",R.drawable.jueves,""),
+					new Items(miDia[4],"",R.drawable.viernes,""),
+					new Items(miDia[5],"",R.drawable.sabado,""),
+					new Items(miDia[6],"",R.drawable.domingo,"")
 			};
-		  
+		   
 			AdaptadorDatos adaptadorDatos = new AdaptadorDatos(actividadActual, misItems);
 			lvDias.setAdapter(adaptadorDatos);
+			
+			lvDias.setOnItemClickListener(new OnItemClickListener()
+			{
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+					//Toast.makeText(getApplicationContext(), "Reproduciendo canción " + position, Toast.LENGTH_SHORT).show();
+					String dia = misItems[position].getNombre();
+					
+					enviar(dia);
+				}
+
+				private void enviar(String dia) {
+					// TODO Auto-generated method stub
+					Intent i = new Intent(actividadActual, Cursos.class);
+					i.putExtra("diaRecuperado", dia);
+					startActivity(i);
+				}
+			});
 			
 			return rootView;
 		}

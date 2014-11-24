@@ -1,22 +1,23 @@
 package com.example.sqlite;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class administracionDb 
+public class administracionDb
 {
 	//TABLAS GENERALES
 	public static final String tablaCursos = "CREATE TABLE IF NOT EXISTS cursos (" +
-            "id INTEGER PRYMARY KEY AUTOINCREMENT,"+
+            "id INTEGER PRIMARY KEY NOT NULL,"+
 			"nombre TEXT NOT NULL,"+
-			"id_profesor" +
+			"id_profesor TEXT," +
             "aula TEXT," +
-            "dias TEXT NOT NULL" +
 			"hora_inicio TEXT" +
 			"hora_salida TEXT);";
 	public static final String tablaAlumnos = "CREATE TABLE IF NOT EXISTS alumnos (" +
-			"codigo INTEGER PRYMARY KEY NOT NULL," +
+			"codigo INTEGER PRIMARY KEY NOT NULL," +
 			"nombre TEXT NOT NULL," +
 			"id_curso TEXT NOT NULL" +
 			"calificacion_tareas INTEGER," +
@@ -24,9 +25,19 @@ public class administracionDb
 			"calificacion_practicas INTEGER" +
 			"derecho_examen INTEGER);";
 	public static final String tablaProfesores = "CREATE TABLE IF NOT EXISTS profesores (" +
-			"id INTEGER PRIMARY KEY AUTOINCREMENT," +
-			"nombre TEXT NOT NULL," +
+			"nombre TEXT NOT NULL PRIMARY KEY," +
 			"contrasenia TEXT);";
+	public static final String tablaDias = "CREATE TABLE IF NOT EXISTS dias(" +
+			"id INTEGER AUTOINCREMENT PRIMARY KEY," +
+			"id_profesor TEXT NOT NULL," +
+			"id_curso INTEGER NOT NULL," +
+			"lunes INTEGER," +
+			"martes INTEGER," +
+			"miercoles INTEGER," +
+			"jueves INTEGER," +
+			"viernes INTEGER," +
+			"sabado INTEGER," +
+			"domingo INTEGER;";
 	
 	//Tablas administrador. Indicadores Examen0, Tareas1, Practicas2.
 	public static final String tablaExamenes = "CREATE TABLE IF NOT EXISTS examenes (" +
@@ -58,9 +69,9 @@ public class administracionDb
 			"id_actividad INTEGER," +
 			"id_curso INTEGER);";
 	
-	//tabla para saber posicionamiento en Actividades
+	//Tabla para saber posicionamiento en Actividades
 	public static final String tablaPosicion = "CREATE TABLE IF NOT EXISTS posicion(" +
-			"id_profesor INTEGER," +
+			"id_profesor TEXT PRIMARY KEY," +
 			"id_curso INTEGER," +
 			"id_alumno INTEGER," +
 			"id_indicador_actividad," +
@@ -69,20 +80,22 @@ public class administracionDb
 	private dbHelper helper;
 	private SQLiteDatabase db;
 	
+	//CONTRUCTOR 
 	public administracionDb(Context contexto)
 	{
 		helper = new dbHelper(contexto);
 		db = helper.getWritableDatabase();
 	}
 	
-	public void registrarProfesor()
+	public void registrarProfesor(String nombre, String contrasenia)
 	{
-		String sqlRegistrarProfesor = "";
+		String sqlRegistrarProfesor = "INSERT INTO profesores (nombre, contrasenia) VALUES ('"+nombre+"','"+contrasenia+"');";
+		db.execSQL(sqlRegistrarProfesor);
 	}
 	
 	public void verificarProfesor()
 	{
-		String sqlVerificarProfesor = "";
+		//String sqlVerificarProfesor = "";
 	}
 	
 	public void cargarCursos()
@@ -92,7 +105,7 @@ public class administracionDb
 	
 	public void cargarAlumnos()
 	{
-		String sqlCargarAlumnos = "";
+		//String sqlCargarAlumnos = "";
 	}
 	
 	public void consultarDatosAlumno()
@@ -105,66 +118,106 @@ public class administracionDb
 	
 	private void datosBasicosAlumno()
 	{
-		String sqlDatosBasicosAlumno = "";
+		//String sqlDatosBasicosAlumno = "";
 	}
 	
 	private void consultarCalificacionAlumno()
 	{
-		String sqlConsultarCalificaciones = "";
+		//String sqlConsultarCalificaciones = "";
 	}
 	
 	private void consultarTrabajosAlumno()
 	{
-		String sqlConsultarTrabajosAlumno = "";
+		//String sqlConsultarTrabajosAlumno = "";
 	}
 	
 	private void verificarDerechoOrdinario()
 	{
-		String sqlDerechoOrdinario = "";
+		//String sqlDerechoOrdinario = "";
 	}
 	
 	public void registrarTareaAlumno()
 	{
-		String sqlRegistrarAlumno = "";
+		//String sqlRegistrarAlumno = "";
 	}
 	
 	public void registrarExamenAlumno()
 	{
-		String sqlRegistrarExamenAlumno = "";
+		//String sqlRegistrarExamenAlumno = "";
 	}
 	
 	public void registrarPracticaAlumno()
 	{
-		String sqlRegistrarPracticaAlumno = "";
+		//String sqlRegistrarPracticaAlumno = "";
 	}
 	
 	public void agregarTareaAdministrador()
 	{
-		String sqlAgregarTareaAlumno = "";
+		//String sqlAgregarTareaAlumno = "";
 	}
 	
 	public void agregarExamenAdministrador()
 	{
-		String sqlAgregarExamenAdminitrador = "";
+		//String sqlAgregarExamenAdminitrador = "";
 	}
 	
 	public void agregarPracticaAdministrador()
 	{
-		String sqlAgregarPracticasAdministrador = "";
+		//String sqlAgregarPracticasAdministrador = "";
 	}
 	
 	public void guardarAsistencias()
 	{
-		String sqlGuardarAsistencias = "";
+		//String sqlGuardarAsistencias = "";
 	}
 	
 	public void justificarFalta()
 	{
-		String sqlJustificarFalta = "";
+		//String sqlJustificarFalta = "";
 	}
 	
 	public void consultarPosicion()
 	{
-		String sqlConsultarPosicion = "";
+		//String sqlConsultarPosicion = "";
+	}
+	
+	public String obtenerProfesorActivo()
+	{
+		String nombreProfesor="";
+		String columnas[] = {"id_profesor"};
+		Cursor cursor = db.query("posicion", columnas, null, null, null, null, null);
+		
+		do
+		{
+			nombreProfesor = cursor.getString(0);
+		}while(cursor.moveToNext());
+		
+		return nombreProfesor;
+	}
+	public String obtenerCursoActivo()
+	{
+		String nombreCurso="";
+		String columnas[] = {"id_curso"};
+		Cursor cursor = db.query("posicion", columnas, null, null, null, null, null);
+		
+		do
+		{
+			nombreCurso = cursor.getString(0);
+		}while(cursor.moveToNext());
+		
+		return nombreCurso;
+	}
+	public String obtenerIdAlumno()
+	{
+		String idAlumno="";
+		String columnas[] = {"id_alumno"};
+		Cursor cursor = db.query("posicion", columnas, null, null, null, null, null);
+		
+		do
+		{
+			idAlumno = cursor.getString(0);
+		}while(cursor.moveToNext());
+		
+		return idAlumno;
 	}
 }

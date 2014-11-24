@@ -37,6 +37,9 @@ public class AdaptadorDatos extends BaseAdapter
 		TextView txtNumero = (TextView) view.findViewById(R.id.txtNumero);
 		txtNumero.setText(items[position].getNumero());
 		
+		TextView txtExtra = (TextView) view.findViewById(R.id.txtExtras);
+		txtExtra.setText(items[position].getExtra());
+		
 		ImageView imgFoto = (ImageView) view.findViewById(R.id.imgFoto);
 		imgFoto.setImageResource(items[position].getImagen());
 		

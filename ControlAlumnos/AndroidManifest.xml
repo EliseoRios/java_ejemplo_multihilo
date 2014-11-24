@@ -34,6 +34,14 @@
             android:name="com.example.adaptadoresListView.AdaptadorDatos"
             android:label="@string/title_activity_adaptador_datos" >
         </activity>
+        <activity
+            android:name="com.example.cursos.EliminarCurso"
+            android:label="@string/title_activity_eliminar_curso" >
+        </activity>
+        <activity
+            android:name="com.example.alumnos.Asistecia"
+            android:label="@string/title_activity_asistecia" >
+        </activity>
     </application>
 
 </manifest>
