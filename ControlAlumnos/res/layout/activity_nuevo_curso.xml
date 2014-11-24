@@ -129,7 +129,6 @@
         android:id="@+id/btnAgregarCurso"
         android:layout_width="278dp"
         android:layout_height="wrap_content"
-        android:text="Agregar" 
-        android:onClick="irNuevoCurso"/>
+        android:text="Agregar" />
 
 </LinearLayout>

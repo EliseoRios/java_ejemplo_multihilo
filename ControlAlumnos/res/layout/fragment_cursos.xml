@@ -34,19 +34,20 @@
             android:tag="salir" />
 
         <ImageButton
-            android:id="@+id/btnNuevo"
+            android:id="@+id/btnNuevoCurso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/nuevo" />
+            android:src="@drawable/nuevo"
+            android:onClick="irNuevoCurso" />
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/btnRecargarCursos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/recargar" />
 
         <ImageButton
-            android:id="@+id/btnEliminar"
+            android:id="@+id/btnEliminarCurso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="irEliminacionActivity"
