@@ -42,6 +42,10 @@
             android:name="com.example.alumnos.Asistecia"
             android:label="@string/title_activity_asistecia" >
         </activity>
+        <activity
+            android:name=".NuevoCurso"
+            android:label="@string/title_activity_nuevo_curso" >
+        </activity>
     </application>
 
 </manifest>

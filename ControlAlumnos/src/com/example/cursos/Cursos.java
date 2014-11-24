@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.example.adaptadoresListView.AdaptadorDatos;
 import com.example.adaptadoresListView.Items;
 import com.example.alumnos.Asistecia;
+import com.example.controlalumnos.NuevoCurso;
 import com.example.controlalumnos.R;
 
 public class Cursos extends ActionBarActivity 
@@ -48,10 +49,16 @@ public class Cursos extends ActionBarActivity
 		startActivity(intencion);
 	}
 	
+	public void irNuevoCurso(View v)
+	{
+		Intent intencion = new Intent(actividadActual, NuevoCurso.class);
+		startActivity(intencion);
+	}
+	
 	public static class PlaceholderFragment extends Fragment 
 	{
 		ListView lvCursos;
-		Button btnEliminar;
+		Button btnEliminar, btnNuevo;
 		
 		public PlaceholderFragment() {
 		}
