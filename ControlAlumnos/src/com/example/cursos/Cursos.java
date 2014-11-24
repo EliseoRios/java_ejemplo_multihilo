@@ -8,12 +8,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.adaptadoresListView.AdaptadorDatos;
 import com.example.adaptadoresListView.Items;
+import com.example.alumnos.Asistecia;
 import com.example.controlalumnos.R;
 
 public class Cursos extends ActionBarActivity 
@@ -75,6 +78,23 @@ public class Cursos extends ActionBarActivity
 			
 			AdaptadorDatos adaptadorDatos = new AdaptadorDatos(actividadActual, misItems);
 			lvCursos.setAdapter(adaptadorDatos);
+			
+			lvCursos.setOnItemClickListener(new OnItemClickListener()
+			{
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+					//Toast.makeText(getApplicationContext(), "Reproduciendo canción " + position, Toast.LENGTH_SHORT).show();
+					String curso = misItems[position].getNombre();
+					
+					enviar(curso);
+				}
+
+				private void enviar(String dia) {
+					// TODO Auto-generated method stub
+					Intent i = new Intent(actividadActual, Asistecia.class);
+					i.putExtra("diaRecuperado", dia);
+					startActivity(i);
+				}
+			});
 			
 			return rootView;
 		}
