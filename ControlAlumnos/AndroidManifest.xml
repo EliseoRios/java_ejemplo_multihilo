@@ -46,6 +46,10 @@
             android:name=".NuevoCurso"
             android:label="@string/title_activity_nuevo_curso" >
         </activity>
+        <activity
+            android:name="com.example.adaptadoresListView.Adaptador_asistencia"
+            android:label="@string/title_activity_adaptador_asistencia" >
+        </activity>
     </application>
 
 </manifest>

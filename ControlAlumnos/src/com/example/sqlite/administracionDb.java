@@ -29,7 +29,6 @@ public class administracionDb
 			"contrasenia TEXT);";
 	public static final String tablaDias = "CREATE TABLE IF NOT EXISTS dias(" +
 			"id INTEGER AUTOINCREMENT PRIMARY KEY," +
-			"id_profesor TEXT NOT NULL," +
 			"id_curso INTEGER NOT NULL," +
 			"lunes INTEGER," +
 			"martes INTEGER," +
@@ -93,19 +92,27 @@ public class administracionDb
 		db.execSQL(sqlRegistrarProfesor);
 	}
 	
-	public void verificarProfesor()
+	public void verificarProfesor(String nombre, String contrasenia)
 	{
-		//String sqlVerificarProfesor = "";
+		//retorna 0 ó 1
+		String sqlVerificarProfesor = "SELECT CASE WHEN COUNT( * ) >0 THEN TRUE " +
+				                      "ELSE FALSE " +
+				                      "END " +
+				                      "FROM profesores WHERE contrasenia = '"+contrasenia+"';";
+		
+		db.rawQuery(sqlVerificarProfesor, null);
 	}
 	
-	public void cargarCursos()
+	public Cursor cargarCursos(String dia, String idProfesor)
 	{
-		String sqlCargarCursos = "";
+		String sqlCargarCursos = "SELECT cursos.nombre FROM cursos,dias WHERE dias.id_curso=cursos.id AND cursos.id_profesor=? AND ?=1;";
+		String argumentosCompara[]={idProfesor, dia};
+		return db.rawQuery(sqlCargarCursos, argumentosCompara);
 	}
 	
-	public void cargarAlumnos()
+	public void cargarAlumnos(String idCurso, String idProfesor)
 	{
-		//String sqlCargarAlumnos = "";
+		String sqlCargarAlumnos = "SELECT alumnos.codigo, alumnos.nombre FROM alumnos, cursos WHERE cursos.id='"+idCurso+"' AND cursos.id=alumnos.id_curso AND cursos.id_profesor='"+idProfesor+"';";	
 	}
 	
 	public void consultarDatosAlumno()
@@ -176,9 +183,22 @@ public class administracionDb
 		//String sqlJustificarFalta = "";
 	}
 	
-	public void consultarPosicion()
+	public void establecerProfesorActivo(String idProfesor)
 	{
-		//String sqlConsultarPosicion = "";
+		String sqlProfesorActivo = "INSERT INTO posicion (id_profesor) VALUES ("+idProfesor+");";
+		db.execSQL(sqlProfesorActivo);
+	}
+	
+	public void establecerCursoActivo(String idCurso)
+	{
+		String sqlCursoActivo = "INSERT INTO posicion (id_curso) VALUES ("+idCurso+");";
+		db.execSQL(sqlCursoActivo);
+	}
+	
+	public void establecerAlumnoActivo(String idAlumno)
+	{
+		String sqlAlumnoActivo =" INSERT INTO posicion (id_alumno) VALUES ("+idAlumno+");";
+		db.execSQL(sqlAlumnoActivo);
 	}
 	
 	public String obtenerProfesorActivo()
@@ -194,6 +214,7 @@ public class administracionDb
 		
 		return nombreProfesor;
 	}
+	
 	public String obtenerCursoActivo()
 	{
 		String nombreCurso="";
@@ -207,6 +228,7 @@ public class administracionDb
 		
 		return nombreCurso;
 	}
+	
 	public String obtenerIdAlumno()
 	{
 		String idAlumno="";

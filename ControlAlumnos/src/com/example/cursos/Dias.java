@@ -1,5 +1,7 @@
 package com.example.cursos;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 import com.example.adaptadoresListView.AdaptadorDatos;
 import com.example.adaptadoresListView.Items;
@@ -51,9 +54,12 @@ public class Dias extends ActionBarActivity
 			administracionDb administracion = new administracionDb(this.getActivity());
 			View rootView = inflater.inflate(R.layout.fragment_dias, container,false);
 		
-			String miDia[] = {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
-
+			final String miDia[] = {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
+			final String diaAEnviar[] = {"lunes","martes","miercoles","jueves","viernes","sabado","domingo"};
+			
 			lvDias = (ListView) rootView.findViewById(R.id.lvDias);
+			
+			
 			
 			final Items[] misItems = {
 					
@@ -73,8 +79,8 @@ public class Dias extends ActionBarActivity
 			{
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 					//Toast.makeText(getApplicationContext(), "Reproduciendo canción " + position, Toast.LENGTH_SHORT).show();
-					String dia = misItems[position].getNombre();
-					
+					String dia = diaAEnviar[position];
+					Toast.makeText(actividadActual, dia, Toast.LENGTH_SHORT).show();
 					enviar(dia);
 				}
 

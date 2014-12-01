@@ -22,5 +22,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Control alumnos</string>
     <string name="title_activity_nuevo_curso">Nuevo curso</string>
+    <string name="title_activity_adaptador_asistencia">Adaptador asistencia</string>
 
 </resources>
